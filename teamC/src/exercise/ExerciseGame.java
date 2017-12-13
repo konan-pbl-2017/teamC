@@ -12,6 +12,7 @@ import com.sun.j3d.utils.image.TextureLoader;
 
 import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
+import framework.game2D.Ground2D;
 import framework.game2D.Sprite;
 import framework.gameMain.SimpleGame;
 import framework.gameMain.SimpleShootingGame;
@@ -23,6 +24,7 @@ import framework.view3D.Camera3D;
 
 public class ExerciseGame extends SimpleShootingGame {
 	Sprite myShip;
+	private Sprite enemy;
 	
 	@Override
 	public void init(Universe universe) {
@@ -47,12 +49,27 @@ public class ExerciseGame extends SimpleShootingGame {
 		universe.place(myShip);
 		setViewRange(30, 30);
 		myShip.setPosition(0.0, 0.0);
+		
+		enemy = new Sprite("data\\images\\Enemy.gif");
+		enemy.setPosition(0.0,10.0);
+		
+		Ground2D stage = new Ground2D(null, "data\\images\\m101.jpg",
+				windowSizeWidth, windowSizeHeight);
+		universe.place(stage);
+
+
 	}
 
 	@Override
 	public void progress(RWTVirtualController virtualController, long interval) {
 		if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
 			myShip.moveRight(5);
+		}
+		if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
+			myShip.moveRight(5);
+			if(myShip.checkCollision(enemy)){
+				System.out.println("“G‚Æ“–‚½‚Á‚½‚æ!");
+			}
 		}
 	}
 
