@@ -1,3 +1,4 @@
+//teamCのプロジェクト
 package action2D;
 
 import javax.vecmath.Vector2d;
@@ -62,7 +63,7 @@ public class TemplateAction2D extends SimpleActionGame {
 		
 		// ステージの3Dデータを読み込み配置する
 		stage = new Ground2D("data\\stage3\\stage3.wrl",
-				"data\\images\\m101.jpg", windowSizeWidth, windowSizeHeight);
+				"data\\images\\teamC\\wall.jpg", windowSizeWidth, windowSizeHeight);
 		universe.place(stage);
 
 		// 表示範囲を決める（左上が原点としてその原点から幅、高さを計算する）
