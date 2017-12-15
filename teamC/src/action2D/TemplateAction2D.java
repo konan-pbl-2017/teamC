@@ -3,11 +3,14 @@ package action2D;
 
 import javax.vecmath.Vector2d;
 
+import framework.RWT.RWTContainer;
 import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
 import framework.game2D.Ground2D;
 import framework.game2D.OvergroundActor2D;
+import framework.game2D.Sprite;
 import framework.game2D.Velocity2D;
+import framework.gameMain.IGameState;
 import framework.gameMain.SimpleActionGame;
 import framework.model3D.Object3D;
 import framework.model3D.Universe;
@@ -27,8 +30,12 @@ public class TemplateAction2D extends SimpleActionGame {
 	int Player_life=3;//playerのLIFE
 	int Player_count;
 
+	private IGameState initialGameState = null;
+	private IGameState finalGameState = null;
 	private Ground2D stage;
-
+//	private Ground2D clear;
+	//private Sprite clear;
+	
 	// あとで設計変更
 	// Enemyクラスでこの値を使いたいため。
 	public static final int RANGE = 30;
@@ -36,6 +43,40 @@ public class TemplateAction2D extends SimpleActionGame {
 	// プレイヤーの現在の速度が代入されるグローバル変数
 	private Velocity2D curV;
 	
+	public TemplateAction2D() {
+		super();
+		initialGameState = new IGameState() {
+			@Override
+			public void init(RWTFrame3D frame) {
+				TemplateAction2D.this.frame = frame;
+				RWTContainer container = new StartContainer(TemplateAction2D.this);
+				changeContainer(container);
+			}
+			@Override
+			public boolean useTimer() {
+				return false;
+			}
+			@Override
+			public void update(RWTVirtualController virtualController, long interval) {
+			}
+		};
+		finalGameState = new IGameState() {
+			@Override
+			public void init(RWTFrame3D frame) {
+				TemplateAction2D.this.frame = frame;
+				RWTContainer container = new EndingContainer(TemplateAction2D.this);
+				changeContainer(container);
+			}
+			@Override
+			public boolean useTimer() {
+				return false;
+			}
+			@Override
+			public void update(RWTVirtualController virtualController, long interval) {
+			}
+		};
+		setCurrentGameState(initialGameState);		
+	}
 	
 	@Override
 	public void init(Universe universe) {
@@ -147,6 +188,18 @@ public class TemplateAction2D extends SimpleActionGame {
 			System.out.println("現在のライフは"+Player_life+"です");
 			get_item=0;
 			universe.displace(item);
+			
+			ending();
+//			clear = new Ground2D("null",
+//					"data\\images\\clear.png", windowSizeWidth, windowSizeHeight);
+//			universe.place(clear);
+			
+			
+			//clear = new Sprite("data\\images\\clear.png");
+			//universe.place(clear);
+			//setViewRange(5, 5);
+			//clear.setPosition(0.0, 0.0);
+			
 			}
 		}
 		//敵の消滅判定
@@ -159,6 +212,24 @@ public class TemplateAction2D extends SimpleActionGame {
 		if(invisible!=0){
 			invisible--;
 		}
+	}
+		
+	public void restart() {
+		stop();
+		setCurrentGameState(initialGameState);
+		start();
+	}
+	
+	public void play() {
+		stop();
+		setCurrentGameState(this);
+		start();
+	}
+	
+	public void ending() {
+		stop();
+		setCurrentGameState(finalGameState);
+		start();
 	}
 
 	/**
@@ -176,5 +247,4 @@ public class TemplateAction2D extends SimpleActionGame {
 	public OvergroundActor2D getOvergroundActor() {
 		return player;
 	}
-
 }
