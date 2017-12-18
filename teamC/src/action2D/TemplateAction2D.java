@@ -169,7 +169,7 @@ public class TemplateAction2D extends SimpleActionGame {
 		else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
 			player.movePositionDown(0.01);
 		}
-		
+		 
 		//°‚É‚Â‚¢‚Ä‚¢‚½‚ç“G‚ª‰EA¶‚É“®‚­
 		if(enemy_1.isOnGround()){
 			enemy_1.movePositionRight(0.05);
