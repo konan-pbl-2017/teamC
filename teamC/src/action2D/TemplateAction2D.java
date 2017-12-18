@@ -131,15 +131,15 @@ public class TemplateAction2D extends SimpleActionGame {
 
 		// キー操作の処理
 		// 左
-		if (virtualController.isKeyDown(0, RWTVirtualController.LEFT)) {
+		if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
 			player.movePositionLeft(0.1);//速度変更
 		}
 		// 右
-		else if (virtualController.isKeyDown(0, RWTVirtualController.RIGHT)) {
+		else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
 			player.movePositionRight(0.1);//速度変更
 		}
 		// 上
-		if (virtualController.isKeyDown(0, RWTVirtualController.UP)) {
+		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
 			// ジャンプ//WキーからSPACEキーに変更予定
 			if (player.isOnGround()) {
 				curV.setY(10.0);
@@ -217,6 +217,8 @@ public class TemplateAction2D extends SimpleActionGame {
 	public void restart() {
 		stop();
 		setCurrentGameState(initialGameState);
+		get_item=1;
+		Player_life=3;
 		start();
 	}
 	
