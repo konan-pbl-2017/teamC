@@ -18,21 +18,11 @@ public class EndingContainer extends RWTContainer {
 		this.game = game;
 	}
 
-	@Override
-	public void build(GraphicsConfiguration gc) {
-		//RWTImage image = new RWTImage("data\\images\\clear.png");
-		//addWidget(image);
-		RWTLabel startLabel = new RWTLabel();
-		startLabel.setColor(Color.YELLOW);
-		startLabel.setString("Game Clear!");
-		startLabel.setRelativePosition(0.15f, 0.25f);
-		Font f = new Font("", Font.PLAIN, 60);
-		startLabel.setFont(f);
-		addWidget(startLabel);
-		
+		@Override
+		public void build(GraphicsConfiguration gc) {
 		RWTLabel startLabe2 = new RWTLabel();
 		startLabe2.setString("Ç®ÇﬂÇ≈Ç∆Ç§ÅIíPà ÇéÊìæÇ≈Ç´ÇΩÅI");
-		startLabe2.setRelativePosition(0.08f, 0.4f);
+		startLabe2.setRelativePosition(0.08f, 0.3f);
 		Font f1 = new Font("", Font.PLAIN, 30);
 		startLabe2.setFont(f1);
 		addWidget(startLabe2);
@@ -57,6 +47,11 @@ public class EndingContainer extends RWTContainer {
 		Font f5 = new Font("", Font.PLAIN, 80);
 		startLabe5.setFont(f5);
 		addWidget(startLabe5);
+		
+		RWTImage image = new RWTImage("data\\images\\clear.png");
+		addWidgetOnBack(image);
+		
+		repaint();
 	}
 
 	@Override
