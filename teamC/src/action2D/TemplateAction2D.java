@@ -42,6 +42,7 @@ public class TemplateAction2D extends SimpleActionGame {
 	
 	private IGameState initialGameState = null;
 	private IGameState finalGameState = null;
+	private IGameState ClearGameState = null;
 	private Ground2D stage;
 //	private Ground2D clear;
 	//private Sprite clear;
@@ -71,6 +72,21 @@ public class TemplateAction2D extends SimpleActionGame {
 			}
 		};
 		finalGameState = new IGameState() {
+			@Override
+			public void init(RWTFrame3D frame) {
+				TemplateAction2D.this.frame = frame;
+				RWTContainer container = new GameOverContainer(TemplateAction2D.this);
+				changeContainer(container);
+			}
+			@Override
+			public boolean useTimer() {
+				return false;
+			}
+			@Override
+			public void update(RWTVirtualController virtualController, long interval) {
+			}
+		};
+		ClearGameState = new IGameState() {
 			@Override
 			public void init(RWTFrame3D frame) {
 				TemplateAction2D.this.frame = frame;
@@ -278,6 +294,7 @@ public class TemplateAction2D extends SimpleActionGame {
 						player.setVelocity(curV);
 						if(BOSS_LIFE==0){
 							universe.displace(boss);
+							ending();
 							}
 						}
 					}
@@ -299,7 +316,6 @@ public class TemplateAction2D extends SimpleActionGame {
 				System.out.println("現在のライフは"+Player_life+"です");
 				get_item=0;
 				universe.displace(item);
-				//ending();
 				}
 			}
 			
@@ -309,7 +325,10 @@ public class TemplateAction2D extends SimpleActionGame {
 		if(BOSS_invisible!=0){
 			BOSS_invisible--;
 			}
-			
+		
+		if(Player_life==0){
+			gameover();
+		}
 		//ending();
 		//clear = new Ground2D("null",
 		//"data\\images\\clear.png", windowSizeWidth, windowSizeHeight);
@@ -328,8 +347,10 @@ public class TemplateAction2D extends SimpleActionGame {
 		setCurrentGameState(initialGameState);
 		get_item=1;
 		Player_life=3;
+		BOSS_LIFE=3;
 		start();
 		}
+	
 	public void play() {
 		stop();
 		setCurrentGameState(this);
@@ -338,9 +359,16 @@ public class TemplateAction2D extends SimpleActionGame {
 	
 	public void ending() {
 		stop();
+		setCurrentGameState(ClearGameState);
+		start();
+		}
+	
+	public void gameover() {
+		stop();
 		setCurrentGameState(finalGameState);
 		start();
 		}
+
 
 	/**
 	 * ゲームのメイン
