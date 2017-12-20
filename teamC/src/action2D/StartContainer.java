@@ -21,13 +21,7 @@ public class StartContainer extends RWTContainer {
   }
 
  @Override
-  public void build(GraphicsConfiguration gc) {
-	 
-	//RWTImage image = new RWTImage("data\\images\\teamC\\start.jpg");
-	//universe.place(image);
-	//image.setRelativePosition(0.25f, 0.5f);
-	//addWidget(image);
-	   
+  public void build(GraphicsConfiguration gc) {   
    RWTLabel startLabel = new RWTLabel();
    startLabel.setColor(Color.BLUE);
    startLabel.setString("GameStart!");
@@ -78,7 +72,11 @@ public class StartContainer extends RWTContainer {
    startLabe7.setFont(f5);
    addWidget(startLabe7);
   
-   
+//   RWTImage image = new RWTImage("data\\images\\teamC\\start.jpg");
+//   addWidgetOnBack(image);
+//   
+//   repaint();
+	
   }
 
  @Override
