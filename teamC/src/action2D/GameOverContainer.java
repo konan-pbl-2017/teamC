@@ -11,27 +11,27 @@ import framework.RWT.RWTLabel;
 import framework.RWT.RWTVirtualController;
 import framework.RWT.RWTVirtualKey;
 
-public class EndingContainer extends RWTContainer {
+public class GameOverContainer extends RWTContainer {
 	private TemplateAction2D game;
 
-	public EndingContainer(TemplateAction2D game) {
+	public GameOverContainer(TemplateAction2D game) {
 		this.game = game;
 	}
 
 	@Override
 	public void build(GraphicsConfiguration gc) {
-		//RWTImage image = new RWTImage("data\\images\\clear.png");
+		//RWTImage image = new RWTImage("data\\images\\gameover.jpg");
 		//addWidget(image);
 		RWTLabel startLabel = new RWTLabel();
-		startLabel.setColor(Color.YELLOW);
-		startLabel.setString("Game Clear!");
-		startLabel.setRelativePosition(0.15f, 0.25f);
-		Font f = new Font("", Font.PLAIN, 60);
+		startLabel.setColor(Color.RED);
+		startLabel.setString("Game Over");
+		startLabel.setRelativePosition(0.05f, 0.25f);
+		Font f = new Font("", Font.PLAIN, 80);
 		startLabel.setFont(f);
 		addWidget(startLabel);
 		
 		RWTLabel startLabe2 = new RWTLabel();
-		startLabe2.setString("おめでとう！単位を取得できた！");
+		startLabe2.setString("ここまでの作業は全部無駄！");
 		startLabe2.setRelativePosition(0.08f, 0.4f);
 		Font f1 = new Font("", Font.PLAIN, 30);
 		startLabe2.setFont(f1);
@@ -51,10 +51,9 @@ public class EndingContainer extends RWTContainer {
 		addWidget(startLabe4);
 		   
 		RWTLabel startLabe5 = new RWTLabel();
-		startLabe5.setColor(Color.RED);
-		startLabe5.setString("秀");
-		startLabe5.setRelativePosition(0.4f, 0.75f);
-		Font f5 = new Font("", Font.PLAIN, 80);
+		startLabe5.setString("ごめんねぇ、僕のせいで無駄な作業させちゃって by新田");
+		startLabe5.setRelativePosition(0.05f, 0.55f);
+		Font f5 = new Font("", Font.PLAIN, 18);
 		startLabe5.setFont(f5);
 		addWidget(startLabe5);
 	}

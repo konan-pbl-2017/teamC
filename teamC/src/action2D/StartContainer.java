@@ -22,15 +22,14 @@ public class StartContainer extends RWTContainer {
 
  @Override
   public void build(GraphicsConfiguration gc) {
-   
-
-  //RWTImage image = new RWTImage("data\\images\\teamC\\start.jpg");
-   //universe.place(image);
-   //image.setRelativePosition(0.25f, 0.5f);
-   //addWidget(image);
-   
+	 
+	//RWTImage image = new RWTImage("data\\images\\teamC\\start.jpg");
+	//universe.place(image);
+	//image.setRelativePosition(0.25f, 0.5f);
+	//addWidget(image);
+	   
    RWTLabel startLabel = new RWTLabel();
-   startLabel.setColor(Color.RED);
+   startLabel.setColor(Color.BLUE);
    startLabel.setString("GameStart!");
    startLabel.setRelativePosition(0.15f, 0.5f);
    Font f = new Font("", Font.PLAIN, 60);
@@ -38,6 +37,7 @@ public class StartContainer extends RWTContainer {
    addWidget(startLabel);
    
    RWTLabel startLabe2 = new RWTLabel();
+   startLabe2.setColor(Color.BLUE);
    startLabe2.setString("Press ShiftKey");
    startLabe2.setRelativePosition(0.25f, 0.65f);
    Font f2 = new Font("", Font.PLAIN, 30);
@@ -45,9 +45,10 @@ public class StartContainer extends RWTContainer {
    addWidget(startLabe2);
    
    RWTLabel startLabe3 = new RWTLabel();
+   startLabe3.setColor(Color.RED);
    startLabe3.setString("“¡‰ª‚³‚ñ‚Ì–`Œ¯");
-   startLabe3.setRelativePosition(0.25f, 0.2f);
-   Font f3 = new Font("", Font.PLAIN, 30);
+   startLabe3.setRelativePosition(0.05f, 0.25f);
+   Font f3 = new Font("", Font.PLAIN, 65);
    startLabe3.setFont(f3);
    addWidget(startLabe3);
    
@@ -76,6 +77,7 @@ public class StartContainer extends RWTContainer {
    startLabe7.setRelativePosition(0.73f, 0.92f);
    startLabe7.setFont(f5);
    addWidget(startLabe7);
+  
    
   }
 
