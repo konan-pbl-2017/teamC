@@ -31,7 +31,7 @@ public class CameraAction extends Camera3D {
 	}
 
 	public void setChaseMode(OvergroundActor2D actor) {
-		setViewPoint(new Position3D(0.0, actor.getPosition().getY(),
+		setViewPoint(new Position3D(actor.getPosition().getX(), actor.getPosition().getY(),
 				cameraRange));
 	}
 

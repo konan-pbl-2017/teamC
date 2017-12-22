@@ -107,7 +107,7 @@ public class TemplateAction2D extends SimpleActionGame {
 	@Override
 	public void init(Universe universe) {
 		player = new Player();
-		player.setPosition(0.0, 0.0);
+		player.setPosition(0.0, 10.0);
 		player.setDirection(0.0, 0.0);
 		universe.place(player); // universeに置く。後で取り除けるようにオブジェクトを配置する。
 
@@ -137,8 +137,8 @@ public class TemplateAction2D extends SimpleActionGame {
 		}// universeに置く。後で取り除けるようにオブジェクトを配置する
 		
 		// ステージの3Dデータを読み込み配置する
-		stage = new Ground2D("data\\stage3\\stage3.wrl",
-				"data\\images\\teamC\\wall.jpg", windowSizeWidth, windowSizeHeight);
+		stage = new Ground2D("data\\images\\teamC\\stage.obj",
+				"data\\images\\teamC\\wall.jpg", windowSizeWidth, windowSizeHeight, 0.09);
 		universe.place(stage);
 
 		// 表示範囲を決める（左上が原点としてその原点から幅、高さを計算する）
@@ -162,30 +162,30 @@ public class TemplateAction2D extends SimpleActionGame {
 		// 静止状態はプレイヤーのxを0にする。（坂で滑って行ってしまうため）
 		curV.setX(0.0);
 		player.setVelocity(curV);
-
-		// キー操作の処理
-		// 左
-		if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
-			player.movePositionLeft(0.1);//速度変更
-		}
-		// 右
-		else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
-			player.movePositionRight(0.1);//速度変更
-		}
-		// 上
-		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
-			// ジャンプ//WキーからSPACEキーに変更予定
-			if (player.isOnGround()) {
-				curV.setY(10.0);
-				player.setVelocity(curV);
+		
+			// キー操作の処理
+			// 左
+			if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
+				player.movePositionLeft(0.1);//速度変更
 			}
-			player_attack++;
-		}
-		// 下
-		else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
-			player.movePositionDown(0.01);
-		}
-		 
+			// 右
+			else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
+				player.movePositionRight(0.1);//速度変更
+			}
+			// 上
+			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
+				// ジャンプ//WキーからSPACEキーに変更予定
+				if (player.isOnGround()) {
+					curV.setY(20.0);
+					player.setVelocity(curV);
+				}
+				player_attack++;
+			}
+			// 下
+			else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
+				player.movePositionDown(0);
+			}
+		
 		//床についていたら敵が右、左に動く
 		if(enemy_1.isOnGround()){
 			enemy_1.movePositionRight(0.05);
