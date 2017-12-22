@@ -20,15 +20,15 @@ import framework.physics.PhysicsUtility;
 public class TemplateAction2D extends SimpleActionGame {
 	
 	private Player player;
-	private Enemy enemy_1;
-	private Enemy enemy_2;
+	
 	private Bullet bullet;
 	int invisible=0;//無敵時間
 	//テスト中アイテム変数
-	private Item item;
-	int get_item=1;//アイテム用の関数、取得の際に減少させよう。
-	int Enemy_life_1=1;
-	int Enemy_life_2=1;
+	
+	int Enemy_life[]=new int[5];
+	private Enemy enemy[]=new Enemy[5];
+	int get_item[]=new int[5];//アイテム取得関数
+	private Item item[]=new Item[5];//アイテム配置
 	int Player_life=3;//playerのLIFE
 	int Player_count;
 	int player_attack=0;
@@ -40,6 +40,8 @@ public class TemplateAction2D extends SimpleActionGame {
 	int BOSS_LIFE=3;
 	int BOSS_invisible=0;
 	
+	int E;//エネミー一括管理用変数
+	int I;//アイテム一括管理
 	private IGameState initialGameState = null;
 	private IGameState finalGameState = null;
 	private IGameState ClearGameState = null;
@@ -111,31 +113,36 @@ public class TemplateAction2D extends SimpleActionGame {
 		player.setDirection(0.0, 0.0);
 		universe.place(player); // universeに置く。後で取り除けるようにオブジェクトを配置する。
 
-		enemy_1 = new Enemy();
-		enemy_1.setPosition(0.0, 5.0);
-		enemy_1.setDirection(1.0, 0.0);
-		universe.place(enemy_1); // universeに置く。後で取り除けるようにオブジェクトを配置する。
-
-		enemy_2 = new Enemy();
-		enemy_2.setPosition(0.0, 5.0);
-		enemy_2.setDirection(1.0, 0.0);
-		universe.place(enemy_2); // universeに置く。後で取り除けるようにオブジェクトを配置する。
+		for(E=1;E<5;E++){
+			enemy[E]=new Enemy();
+			Enemy_life[E]=1;
+		}
+		enemy[1].setPosition(10.0,25.0);
+		enemy[2].setPosition(5.0,25.0);
+		enemy[3].setPosition(-5.0,25.0);
+		enemy[4].setPosition(-10.0,25.0);
+		
+		for(E=1;E<5;E++){
+			enemy[E].setDirection(1.0,0.0);
+			universe.place(enemy[E]);
+		}
 		
 		//ボスの設定
 		boss = new Enemy_2();
-		boss.setPosition(0.0, 5.0);
+		boss.setPosition(0.0, 100.0);
 		boss.setDirection(1.0, 0.0);
 		universe.place(boss); // universeに置く。後で取り除けるようにオブジェクトを配置する。
 				
 		bullet = new Bullet();
 		
-		item = new Item();
-		if(get_item==1){
-		item.setPosition(5.0, 0.0);
-		item.setDirection(1.0, 0.0);
-		universe.place(item);
-		}// universeに置く。後で取り除けるようにオブジェクトを配置する
-		
+		for(I=1;I<2;I++){
+		item[I] = new Item();
+		}
+		item[1].setPosition(0.0,95.0);
+		for(I=0;I<2;I++){
+			item[I].setDirection(0.0,0.0);
+			universe.place(item[I]);
+		}
 		// ステージの3Dデータを読み込み配置する
 		stage = new Ground2D("data\\images\\teamC\\stage.obj",
 				"data\\images\\teamC\\wall.jpg", windowSizeWidth, windowSizeHeight, 0.09);
@@ -187,13 +194,17 @@ public class TemplateAction2D extends SimpleActionGame {
 		}
 
 		//床についていたら敵が右、左に動く
-		if(enemy_1.isOnGround()){
-			enemy_1.movePositionRight(0.05);
-		}
-		if(enemy_2.isOnGround()){
-			enemy_2.movePositionLeft(0.1);
-		}
 		
+		for(E=1;E<3;E++){
+			if(enemy[E].isOnGround()){
+				enemy[E].movePositionRight(0.05);
+			}
+		}
+		for(E=3;E<5;E++){
+			if(enemy[E].isOnGround()){
+				enemy[E].movePositionLeft(0.05);
+			}
+		}
 		bullet.movePositionRight(0.5);//弾丸の動き
 		
 		//ボスの設定
@@ -222,54 +233,37 @@ public class TemplateAction2D extends SimpleActionGame {
 			}
 					
 		player.motion(interval, stage);
-		enemy_1.motion(interval, stage);
-		enemy_2.motion(interval, stage);
+		for(E=1;E<5;E++){
+			enemy[E].motion(interval, stage);
+			}
 		boss.motion(interval,stage);
 		// 衝突判定（プレイヤーと敵）
 		if(player.isOnGround()){
 			player_attack=0;
 			}
-		if(player_attack==0){
-			if (player.checkCollision(enemy_1)) {
-				if(Enemy_life_1==1){
-					if(invisible==0){
-						System.out.println("1番の敵に接触した！");
-						Player_life--;
-						System.out.println("現在のライフは"+Player_life+"です");
-						invisible=60;
+		for(E=1;E<5;E++){
+			if(player_attack==0){
+				if (player.checkCollision(enemy[E])) {
+					if(Enemy_life[E]==1){
+						if(invisible==0){
+							System.out.println(+E+"番の敵に接触した！");
+							Player_life--;
+							System.out.println("現在のライフは"+Player_life+"です");
+							invisible=60;
 						}
 					}
 				}
 			}
-		if (player.checkCollision(enemy_1)) {
+		if (player.checkCollision(enemy[E])) {
 			if(player_attack>0){
-				if(Enemy_life_1==1){
-					System.out.println("1番の敵を倒した");
-					Enemy_life_1--;
-					universe.displace(enemy_1);							}
-				}
-			}
-		if(player_attack==0){
-			if (player.checkCollision(enemy_2)) {
-				if(Enemy_life_2==1){
-					if(invisible==0){
-						System.out.println("2番の敵に接触した！");
-						Player_life--;
-						System.out.println("現在のライフは"+Player_life+"です");
-						invisible=60;
-						}
+				if(Enemy_life[E]==1){
+					System.out.println(+E+"番の敵を倒した");
+					Enemy_life[E]--;
+					universe.displace(enemy[E]);
 					}
 				}
 			}
-		if (player.checkCollision(enemy_2)) {
-			if(player_attack>0){
-				if(Enemy_life_2==1){
-					System.out.println("2番の敵を倒した");
-					Enemy_life_2--;
-					universe.displace(enemy_2);
-					}
-				}
-			}
+		}
 		if(player_attack==0){
 			if (player.checkCollision(boss)) {
 				if(BOSS_LIFE>0){
@@ -309,13 +303,14 @@ public class TemplateAction2D extends SimpleActionGame {
 		//}
 		//}
 		//BOSSとITEMを追加する
-		if(get_item==1){
-			if(player.checkCollision(item)){
+		for(I=1;I<2;I++)
+		if(get_item[I]==1){
+			if(player.checkCollision(item[I])){
 				System.out.println("アイテムを取得した");
 				Player_life++;
 				System.out.println("現在のライフは"+Player_life+"です");
-				get_item=0;
-				universe.displace(item);
+				get_item[I]=0;
+				universe.displace(item[I]);
 				}
 			}
 			
@@ -345,7 +340,12 @@ public class TemplateAction2D extends SimpleActionGame {
 	public void restart() {
 		stop();
 		setCurrentGameState(initialGameState);
-		get_item=1;
+		for(I=1;I<2;I++){
+		get_item[I]=1;
+		}
+		for(E=1;E<5;E++){
+			Enemy_life[E]=1;
+		}
 		Player_life=3;
 		BOSS_LIFE=3;
 		start();
