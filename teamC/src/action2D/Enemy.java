@@ -22,7 +22,7 @@ public class Enemy extends OvergroundActor2D {
 
 	@Override
 	public String getModelFileName() {
-		return "data\\Head4.wrl";
+		return "data\\images\\teamC\\nokonoko2.obj";
 	}
 	
 	public void motion(long interval, Ground2D ground, Player player) {

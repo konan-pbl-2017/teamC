@@ -28,6 +28,7 @@ public class TemplateAction2D extends SimpleActionGame {
 	int Enemy_life[]=new int[5];
 	private Enemy enemy[]=new Enemy[5];
 	int get_item[]=new int[5];//アイテム取得関数
+	
 	private Item item[]=new Item[5];//アイテム配置
 	int Player_life=3;//playerのLIFE
 	int Player_count;
@@ -125,13 +126,14 @@ public class TemplateAction2D extends SimpleActionGame {
 		enemy[4].setPosition(-10.0,25.0);
 		
 		for(E=1;E<5;E++){
+			((Object3D)enemy[E].getBody()).scale(0.1);
 			enemy[E].setDirection(1.0,0.0);
 			universe.place(enemy[E]);
 		}
 		
 		//ボスの設定
 		boss = new Enemy_2();
-		boss.setPosition(0.0, 100.0);
+		boss.setPosition(0.0, 50.0);
 		boss.setDirection(1.0, 0.0);
 		((Object3D)boss.getBody()).scale(0.4, 0.25, 0.25);
 		universe.place(boss); // universeに置く。後で取り除けるようにオブジェクトを配置する。
@@ -140,9 +142,11 @@ public class TemplateAction2D extends SimpleActionGame {
 		
 		for(I=1;I<2;I++){
 		item[I] = new Item();
+		get_item[I]=1;
 		}
 		item[1].setPosition(0.0,95.0);
 		for(I=1;I<2;I++){
+			((Object3D)item[I].getBody()).scale(0.1);
 			item[I].setDirection(0.0,0.0);
 			universe.place(item[I]);
 		}
@@ -198,12 +202,12 @@ public class TemplateAction2D extends SimpleActionGame {
 
 		//床についていたら敵が右、左に動く
 		
-		for(E=1;E<3;E++){
+		for(E=3;E<5;E++){
 			if(enemy[E].isOnGround()){
 				enemy[E].movePositionRight(0.05);
 			}
 		}
-		for(E=3;E<5;E++){
+		for(E=1;E<3;E++){
 			if(enemy[E].isOnGround()){
 				enemy[E].movePositionLeft(0.05);
 			}
@@ -299,7 +303,7 @@ public class TemplateAction2D extends SimpleActionGame {
 			}
 		
 		//BOSSとITEMを追加する
-		for(I=1;I<2;I++)
+		for(I=1;I<3;I++){
 		if(get_item[I]==1){
 			if(player.checkCollision(item[I])){
 				System.out.println("アイテムを取得した");
@@ -309,6 +313,7 @@ public class TemplateAction2D extends SimpleActionGame {
 				universe.displace(item[I]);
 				}
 			}
+		}
 			
 		if(invisible!=0){
 			invisible--;
