@@ -22,7 +22,7 @@ public class Item extends OvergroundActor2D {
 
 	@Override
 	public String getModelFileName() {
-		return "data\\TemplateShooting\\Character\\pocha\\pocha.wrl";
+		return "data\\images\\teamC\\アイテム(オムライス).obj";
 	}
 	
 	public void motion(long interval, Ground2D ground, Player player) {
