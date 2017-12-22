@@ -163,29 +163,29 @@ public class TemplateAction2D extends SimpleActionGame {
 		curV.setX(0.0);
 		player.setVelocity(curV);
 		
-			// キー操作の処理
-			// 左
-			if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
-				player.movePositionLeft(0.1);//速度変更
+		// キー操作の処理
+		// 左
+		if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
+			player.movePositionLeft(0.05);// 速度変更
+		}
+		// 右
+		else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
+			player.movePositionRight(0.05);// 速度変更
+		}
+		// 上
+		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
+			// ジャンプ//WキーからSPACEキーに変更予定
+			if (player.isOnGround()) {
+				curV.setY(20.0);
+				player.setVelocity(curV);
 			}
-			// 右
-			else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
-				player.movePositionRight(0.1);//速度変更
-			}
-			// 上
-			if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
-				// ジャンプ//WキーからSPACEキーに変更予定
-				if (player.isOnGround()) {
-					curV.setY(20.0);
-					player.setVelocity(curV);
-				}
-				player_attack++;
-			}
-			// 下
-			else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
-				player.movePositionDown(0);
-			}
-		
+			player_attack++;
+		}
+		// 下
+		else if (virtualController.isKeyDown(0, RWTVirtualController.DOWN)) {
+			player.movePositionDown(0);
+		}
+
 		//床についていたら敵が右、左に動く
 		if(enemy_1.isOnGround()){
 			enemy_1.movePositionRight(0.05);
