@@ -294,14 +294,7 @@ public class TemplateAction2D extends SimpleActionGame {
 					}
 				}
 			}
-		//if(player.checkCollision(bullet)) {
-		//if(invisible==0){
-		//System.out.println("3”Ô‚Ì“G(’eŠÛ)‚ÉÚG‚µ‚½I");
-		//Player_life--;
-		//System.out.println("Œ»İ‚Ìƒ‰ƒCƒt‚Í"+Player_life+"‚Å‚·");
-		//invisible=60;
-		//}
-		//}
+		
 		//BOSS‚ÆITEM‚ğ’Ç‰Á‚·‚é
 		for(I=1;I<2;I++)
 		if(get_item[I]==1){
