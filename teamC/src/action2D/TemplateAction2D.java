@@ -23,7 +23,7 @@ public class TemplateAction2D extends SimpleActionGame {
 	
 	private Player player;
 	
-	private Sound3D start = null;
+	private Sound3D start = null;  
 	private Sound3D clear = null;
 	private Sound3D gameover = null;
 	private Sound3D play = null;
