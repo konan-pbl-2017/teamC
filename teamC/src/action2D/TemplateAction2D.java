@@ -154,7 +154,7 @@ public class TemplateAction2D extends SimpleActionGame {
 		((Object3D)boss.getBody()).scale(0.4, 0.25, 0.25);
 		universe.place(boss); // universeに置く。後で取り除けるようにオブジェクトを配置する。
 				
-		bullet = new Bullet();  
+		bullet = new Bullet();
 		
 		for(I=1;I<2;I++){
 		item[I] = new Item();
