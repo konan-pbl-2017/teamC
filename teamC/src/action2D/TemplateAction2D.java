@@ -176,11 +176,11 @@ public class TemplateAction2D extends SimpleActionGame {
 		// キー操作の処理
 		// 左
 		if (virtualController.isKeyDown(1, RWTVirtualController.LEFT)) {
-			player.movePositionLeft(0.05);// 速度変更
+			player.movePositionLeft(0.08);// 速度変更
 		}
 		// 右
 		else if (virtualController.isKeyDown(1, RWTVirtualController.RIGHT)) {
-			player.movePositionRight(0.05);// 速度変更
+			player.movePositionRight(0.08);// 速度変更
 		}
 		// 上
 		if (virtualController.isKeyDown(0, RWTVirtualController.BUTTON_C)) {
