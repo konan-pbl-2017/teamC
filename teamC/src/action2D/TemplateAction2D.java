@@ -138,14 +138,14 @@ public class TemplateAction2D extends SimpleActionGame {
 				
 		bullet = new Bullet();
 		
-		/*for(I=1;I<2;I++){
+		for(I=1;I<2;I++){
 		item[I] = new Item();
 		}
 		item[1].setPosition(0.0,95.0);
-		for(I=0;I<2;I++){
+		for(I=1;I<2;I++){
 			item[I].setDirection(0.0,0.0);
 			universe.place(item[I]);
-		}*/
+		}
 		// ステージの3Dデータを読み込み配置する
 		stage = new Ground2D("data\\images\\teamC\\stage.obj",
 				"data\\images\\teamC\\wall.jpg", windowSizeWidth, windowSizeHeight, 0.09);
