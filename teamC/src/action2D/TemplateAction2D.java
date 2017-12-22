@@ -42,6 +42,7 @@ public class TemplateAction2D extends SimpleActionGame {
 	
 	int E;//エネミー一括管理用変数
 	int I;//アイテム一括管理
+	
 	private IGameState initialGameState = null;
 	private IGameState finalGameState = null;
 	private IGameState ClearGameState = null;
