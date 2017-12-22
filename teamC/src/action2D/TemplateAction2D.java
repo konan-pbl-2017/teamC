@@ -6,6 +6,8 @@ import javax.vecmath.Vector2d;
 import framework.RWT.RWTContainer;
 import framework.RWT.RWTFrame3D;
 import framework.RWT.RWTVirtualController;
+import framework.audio.BGM3D;
+import framework.audio.Sound3D;
 import framework.game2D.Ground2D;
 import framework.game2D.OvergroundActor2D;
 import framework.game2D.Sprite;
@@ -20,6 +22,11 @@ import framework.physics.PhysicsUtility;
 public class TemplateAction2D extends SimpleActionGame {
 	
 	private Player player;
+	
+	private Sound3D start = null;
+	private Sound3D clear = null;
+	private Sound3D gameover = null;
+	private Sound3D play = null;
 	
 	private Bullet bullet;
 	int invisible=0;//無敵時間
@@ -65,6 +72,8 @@ public class TemplateAction2D extends SimpleActionGame {
 			public void init(RWTFrame3D frame) {
 				TemplateAction2D.this.frame = frame;
 				RWTContainer container = new StartContainer(TemplateAction2D.this);
+				start = BGM3D.registerBGM("data\\start.wav");
+				BGM3D.playBGM(start); 
 				changeContainer(container);
 			}
 			@Override
@@ -80,6 +89,8 @@ public class TemplateAction2D extends SimpleActionGame {
 			public void init(RWTFrame3D frame) {
 				TemplateAction2D.this.frame = frame;
 				RWTContainer container = new GameOverContainer(TemplateAction2D.this);
+				gameover = BGM3D.registerBGM("data\\gameover.wav");
+				BGM3D.playBGM(gameover); 
 				changeContainer(container);
 			}
 			@Override
@@ -95,6 +106,8 @@ public class TemplateAction2D extends SimpleActionGame {
 			public void init(RWTFrame3D frame) {
 				TemplateAction2D.this.frame = frame;
 				RWTContainer container = new EndingContainer(TemplateAction2D.this);
+				play = BGM3D.registerBGM("data\\play.wav");
+				BGM3D.playBGM(play); 
 				changeContainer(container);
 			}
 			@Override
@@ -115,7 +128,10 @@ public class TemplateAction2D extends SimpleActionGame {
 		player.setDirection(0.0, 0.0);
 		((Object3D)player.getBody()).scale(0.1);
 		universe.place(player); // universeに置く。後で取り除けるようにオブジェクトを配置する。
-
+		
+		play = BGM3D.registerBGM("data\\play.wav");
+		BGM3D.playBGM(play); 
+		
 		for(E=1;E<5;E++){
 			enemy[E]=new Enemy();
 			Enemy_life[E]=1;
@@ -126,7 +142,7 @@ public class TemplateAction2D extends SimpleActionGame {
 		enemy[4].setPosition(-10.0,25.0);
 		
 		for(E=1;E<5;E++){
-			((Object3D)enemy[E].getBody()).scale(0.1);
+			((Object3D)enemy[E].getBody()).scale(0.05);
 			enemy[E].setDirection(1.0,0.0);
 			universe.place(enemy[E]);
 		}
