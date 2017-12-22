@@ -111,6 +111,7 @@ public class TemplateAction2D extends SimpleActionGame {
 		player = new Player();
 		player.setPosition(0.0, 10.0);
 		player.setDirection(0.0, 0.0);
+		((Object3D)player.getBody()).scale(0.1);
 		universe.place(player); // universeに置く。後で取り除けるようにオブジェクトを配置する。
 
 		for(E=1;E<5;E++){
